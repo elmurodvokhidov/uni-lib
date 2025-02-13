@@ -7,11 +7,11 @@ export default function BookOverview({
     author,
     genre,
     rating,
-    total_copies,
-    aviailable_copies,
+    totalCopies,
+    availableCopies,
     description,
-    color,
-    cover,
+    coverColor,
+    coverUrl,
 }: Book) {
     return (
         <section className='book-overview'>
@@ -43,11 +43,11 @@ export default function BookOverview({
 
                 <div className="book-copies">
                     <p>
-                        Total Books: <span>{total_copies}</span>
+                        Total Books: <span>{totalCopies}</span>
                     </p>
 
                     <p>
-                        Aviailable Books: <span>{aviailable_copies}</span>
+                        Aviailable Books: <span>{availableCopies}</span>
                     </p>
                 </div>
 
@@ -55,7 +55,7 @@ export default function BookOverview({
                     {description}
                 </p>
 
-                <Button className="book-overview__btn">
+                <Button className="book-overview_btn">
                     <Image
                         src="/icons/book.svg"
                         alt="book"
@@ -72,15 +72,15 @@ export default function BookOverview({
                     <BookCover
                         variant="wide"
                         className="z-10"
-                        coverColor={color}
-                        coverImage={cover}
+                        coverColor={coverColor}
+                        coverUrl={coverUrl}
                     />
 
                     <div className="absolute left-16 top-10 rotate-12 opacity-40 max-sm:hidden">
                         <BookCover
                             variant="wide"
-                            coverColor={color}
-                            coverImage={cover}
+                            coverColor={coverColor}
+                            coverUrl={coverUrl}
                         />
                     </div>
                 </div>
