@@ -17,6 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { bookSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
+import FileUpload from "@/components/FileUpload";
 
 interface Props extends Partial<Book> {
     type?: "create" | "update";
@@ -157,7 +158,15 @@ export default function BookForm({ type, ...book }: Props) {
                                 Book Image
                             </FormLabel>
                             <FormControl>
-                                FileUpload
+                                <FileUpload
+                                    type="image"
+                                    accept="image/*"
+                                    placeholder="Upload the book cover"
+                                    folder="books/covers"
+                                    variant="light"
+                                    onFileChange={field.onChange}
+                                    value={field.value}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -210,7 +219,15 @@ export default function BookForm({ type, ...book }: Props) {
                                 Book Video
                             </FormLabel>
                             <FormControl>
-                                FileUpload
+                                <FileUpload
+                                    type="video"
+                                    accept="video/*"
+                                    placeholder="Upload the book trailer"
+                                    folder="books/videos"
+                                    variant="light"
+                                    onFileChange={field.onChange}
+                                    value={field.value}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
