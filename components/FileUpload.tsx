@@ -47,7 +47,7 @@ export default function FileUpload({
     onFileChange,
 }: Props) {
     const IKUploadRef = useRef(null);
-    const [file, setFile] = useState<{ filePath: string } | null>(null);
+    const [file, setFile] = useState<{ filePath: string | null }>({ filePath: value ?? null });
     const [progress, setProgress] = useState(0);
 
     const styles = {
@@ -142,14 +142,14 @@ export default function FileUpload({
             {file && (
                 (type === "image" ? (
                     <IKImage
-                        path={file.filePath}
-                        alt={file.filePath}
+                        path={file?.filePath!}
+                        alt={file?.filePath!}
                         width={500}
                         height={500}
                     />
                 ) : type === "video" ? (
                     <IKVideo
-                        path={file.filePath}
+                        path={file?.filePath!}
                         controls={true}
                         className="w-full h-96 rounded-xl"
                     />

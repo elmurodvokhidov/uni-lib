@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { bookSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FileUpload from "@/components/FileUpload";
+import ColorPicker from "../ColorPicker";
 
 interface Props extends Partial<Book> {
     type?: "create" | "update";
@@ -182,7 +183,10 @@ export default function BookForm({ type, ...book }: Props) {
                                 Book Primary Color
                             </FormLabel>
                             <FormControl>
-                                ColorPicker
+                                <ColorPicker
+                                    value={field.value}
+                                    onPickerChange={field.onChange}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

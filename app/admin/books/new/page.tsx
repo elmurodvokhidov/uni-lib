@@ -1,6 +1,6 @@
+import BookForm from "@/components/admin/forms/BookForm";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import BookForm from "../../forms/BookForm";
 
 export default function page() {
     return (
