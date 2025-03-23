@@ -59,23 +59,23 @@ export default function FileUpload({
     const onSuccess = (res: any) => {
         setFile(res);
         onFileChange(res.filePath);
-        toast(`${res.filePath} uploaded successfully`);
+        toast.success(`${res.filePath} uploaded successfully`);
     }
 
     const onError = (err: any) => {
         console.log(err);
-        toast(`Your ${type} could not be uploaded. Please try again.`);
+        toast.error(`Your ${type} could not be uploaded. Please try again.`);
     }
 
     const onValidate = (file: File) => {
         if (type === "image") {
             if (file.size > 20 * 1024 * 1024) {
-                toast("Please upload a file that is less than 10MB in size.");
+                toast.error("Please upload a file that is less than 10MB in size.");
                 return false;
             }
         } else if (type === "video") {
             if (file.size > 50 * 1024 * 1024) {
-                toast("Please upload a file that is less than 50MB in size.");
+                toast.error("Please upload a file that is less than 50MB in size.");
                 return false;
             }
         }

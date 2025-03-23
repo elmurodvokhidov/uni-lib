@@ -46,7 +46,7 @@
     }
 
     .book-form_btn {
-        @apply min-h-14 w-full bg-primary-admin hover:bg-primary-admin/95 !important;
+        @apply min-h-14 w-full text-white bg-primary-admin hover:bg-primary-admin/95 !important;
     }
 
     /* Home Page */

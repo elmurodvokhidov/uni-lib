@@ -19,12 +19,16 @@ import { bookSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FileUpload from "@/components/FileUpload";
 import ColorPicker from "../ColorPicker";
+import { createBook } from "@/lib/admin/actions/book";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface Props extends Partial<Book> {
     type?: "create" | "update";
 }
 
 export default function BookForm({ type, ...book }: Props) {
+    const router = useRouter();
     const form = useForm<z.infer<typeof bookSchema>>({
         resolver: zodResolver(bookSchema),
         defaultValues: {
@@ -41,7 +45,16 @@ export default function BookForm({ type, ...book }: Props) {
         },
     });
 
-    async function onSubmit(values: z.infer<typeof bookSchema>) { }
+    async function onSubmit(values: z.infer<typeof bookSchema>) {
+        const res = await createBook(values);
+
+        if (res.success) {
+            toast.success("Book created successfully.");
+            router.push(`/admin/books/${res.data.id}`);
+        } else {
+            toast.error(res.message);
+        }
+    }
 
     return (
         <Form {...form}>

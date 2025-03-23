@@ -51,10 +51,10 @@ export default function AuthForm<T extends FieldValues>({
         const result = await onSubmit(data);
 
         if (result.success) {
-            toast(`${isSignIn ? "You have successfully signed in" : "You have successfully signed up"}`);
+            toast.success(`${isSignIn ? "You have successfully signed in" : "You have successfully signed up"}`);
             router.push("/");
         } else {
-            toast(`${result.error ?? "An error occurred"}`);
+            toast.error(`${result.error ?? "An error occurred"}`);
         }
     }
 
