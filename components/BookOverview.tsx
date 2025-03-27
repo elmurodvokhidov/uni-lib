@@ -1,12 +1,16 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import BookCover from "./BookCover";
+import BorrowBook from "./BorrowBook";
+import { db } from "@/database/drizzle";
+import { users } from "@/database/schema";
+import { eq } from "drizzle-orm";
 
 interface Props extends Book {
     userId: string;
 }
 
-export default function BookOverview({
+export default async function BookOverview({
     id,
     title,
     author,
@@ -19,6 +23,20 @@ export default function BookOverview({
     coverUrl,
     userId,
 }: Props) {
+    const [user] = await db
+        .select()
+        .from(users)
+        .where(eq(users.id, userId))
+        .limit(1);
+
+    const borrowingEligibility = {
+        isEligible: availableCopies > 0 && user?.status === "APPROVED",
+        message:
+            availableCopies <= 0
+                ? "Book is not available"
+                : "You are not allowed to borrow this book until your account is approved",
+    };
+
     return (
         <section className='book-overview'>
             <div className='flex flex-1 flex-col gap-5'>
@@ -61,16 +79,11 @@ export default function BookOverview({
                     {description}
                 </p>
 
-                <Button className="book-overview_btn">
-                    <Image
-                        src="/icons/book.svg"
-                        alt="book"
-                        width={20}
-                        height={20}
-                    />
-
-                    <p className="font-bebas-neue text-xl text-dark-100">Borrow Book</p>
-                </Button>
+                {user && <BorrowBook
+                    bookId={id}
+                    userId={userId}
+                    borrowingEligibility={borrowingEligibility}
+                />}
             </div>
 
             <div className="relative flex flex-1 justify-center">

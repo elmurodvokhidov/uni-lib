@@ -15,6 +15,13 @@
       "when": 1742730328508,
       "tag": "0001_pretty_praxagora",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1743059213653,
+      "tag": "0002_glamorous_lockjaw",
+      "breakpoints": true
     }
   ]
 }
